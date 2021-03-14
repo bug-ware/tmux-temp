@@ -12,10 +12,10 @@ print_cpu_temp() {
   # try if this is Raspberry Pi
   if command_exists "vcgencmd"; then
     temp=$(vcgencmd measure_temp | tr -d -c 0-9.)
-  elif command_exists "~/bin/iacclients/servertemp.py"; then
+  elif [[ -f ~/bin/iacclients/servertemp.py ]]; then
     temp=$(~/bin/iacclients/servertemp.py 0)
     echo "${temp}°C"
-    return
+    return 0
   # try with very common lm-sensors package
   elif command_exists "sensors"; then
     local units=$1
